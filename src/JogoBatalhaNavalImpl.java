@@ -7,13 +7,13 @@
  *
  * @author André
  */
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JogoBatalhaNavalImpl extends UnicastRemoteObject implements JogoBatalhaNaval {
+
     private static final int TAMANHO_GRADE = 10;
     private char[][] gradeJogador1 = new char[TAMANHO_GRADE][TAMANHO_GRADE];
     private char[][] gradeJogador2 = new char[TAMANHO_GRADE][TAMANHO_GRADE];
@@ -40,8 +40,8 @@ public class JogoBatalhaNavalImpl extends UnicastRemoteObject implements JogoBat
             grades.put(nome, grades.size() == 0 ? gradeJogador1 : gradeJogador2);
             System.out.println(nome + " entrou no jogo.");
             if (grades.size() == 2) {
-                jogadorAtual = nome; 
-                jogoIniciado = true; 
+                jogadorAtual = nome;
+                jogoIniciado = true;
                 System.out.println("Ambos os jogadores estão conectados. O jogo começou!");
             }
         } else {
@@ -56,12 +56,18 @@ public class JogoBatalhaNavalImpl extends UnicastRemoteObject implements JogoBat
 
         char[][] gradeOponente = jogadorAtual.equals("Jogador1") ? gradeJogador2 : gradeJogador1;
 
-        if (gradeOponente[linha][coluna] == '-') {
+        if (gradeOponente[linha][coluna] == 'X' || gradeOponente[linha][coluna] == 'O') {
+            return "Você já atacou essa posição!";
+        }
+
+        if (gradeOponente[linha][coluna] == 'N') {
             gradeOponente[linha][coluna] = 'X'; 
             trocarJogador(); 
-            return "Acertou!";
+            return "Acertou um navio!";
         } else {
-            return "Já atacou essa posição!";
+            gradeOponente[linha][coluna] = 'O'; 
+            trocarJogador(); 
+            return "Acertou na água!";
         }
     }
 

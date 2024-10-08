@@ -7,7 +7,6 @@
  *
  * @author André
  */
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +14,12 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 
 public class ClienteGUI extends JFrame {
+
     private JButton[][] botoesAtaque;
     private JButton[][] botoesDefesa;
     private JogoBatalhaNaval jogo;
     private String nomeJogador;
-    private int naviosRestantes = 5; 
+    private int naviosRestantes = 5;
 
     public ClienteGUI() {
         setTitle("Batalha Naval");
@@ -45,13 +45,13 @@ public class ClienteGUI extends JFrame {
 
                 int linha = i;
                 int coluna = j;
-                
+
                 botoesDefesa[i][j].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         posicionarNavio(linha, coluna);
                     }
                 });
-                
+
                 botoesAtaque[i][j].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         realizarAtaque(linha, coluna);
@@ -86,7 +86,8 @@ public class ClienteGUI extends JFrame {
 
     private void posicionarNavio(int linha, int coluna) {
         if (naviosRestantes > 0) {
-            botoesDefesa[linha][coluna].setBackground(Color.GRAY); 
+            botoesDefesa[linha][coluna].setText("N");
+            botoesDefesa[linha][coluna].setBackground(Color.GRAY);
             naviosRestantes--;
             if (naviosRestantes == 0) {
                 JOptionPane.showMessageDialog(this, "Todos os navios foram posicionados!");
@@ -113,7 +114,7 @@ public class ClienteGUI extends JFrame {
     private void atualizarEstadoJogo() {
         try {
             String estado = jogo.obterEstadoJogo();
-            System.out.println(estado);  
+            System.out.println(estado);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar estado do jogo: " + e.getMessage());
         }
