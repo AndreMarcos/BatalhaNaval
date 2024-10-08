@@ -18,7 +18,7 @@ public class Servidor {
 
             JogoBatalhaNavalImpl jogo = new JogoBatalhaNavalImpl();
 
-            Naming.rebind("rmi://localhost/BatalhaNaval", jogo);
+            Naming.rebind("rmi://198.27.114.55/BatalhaNaval", jogo);
 
             System.out.println("Servidor de Batalha Naval pronto.");
         } catch (Exception e) {

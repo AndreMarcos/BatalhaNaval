@@ -69,7 +69,7 @@ public class ClienteGUI extends JFrame {
 
     private void conectarAoServidor() {
         try {
-            jogo = (JogoBatalhaNaval) Naming.lookup("rmi://localhost/BatalhaNaval");
+            jogo = (JogoBatalhaNaval) Naming.lookup("rmi://198.27.114.55/BatalhaNaval");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao servidor: " + e.getMessage());
         }
